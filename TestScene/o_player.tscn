@@ -1,0 +1,58 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://TestScene/o_player.gd" type="Script" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8, 8 )
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0.0078125, 0.578125, 1 )
+colors = PoolColorArray( 0.746094, 0, 0, 1, 0.789063, 0.38461, 0.0277405, 1, 0.996094, 0.794553, 0.00389099, 1 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
+
+[sub_resource type="Curve" id=4]
+_data = [ Vector2( 0.0107527, 0.963636 ), 0.0, -3.24655, 0, 0, Vector2( 1, 0 ), 0.0589851, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=5]
+curve = SubResource( 4 )
+
+[sub_resource type="ParticlesMaterial" id=6]
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 50.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.3
+scale_curve = SubResource( 5 )
+color_ramp = SubResource( 3 )
+
+[node name="o_player" type="KinematicBody2D"]
+script = ExtResource( 1 )
+movement_node_path = NodePath("MovementTween")
+
+[node name="Sprite" type="Sprite" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="MovementTween" type="Tween" parent="."]
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color( 0.607843, 0.0509804, 0.0509804, 1 )
+polygon = PoolVector2Array( 8, 8, -8, 8, -8, -8, 8, -8 )
+
+[node name="Trail" type="Particles2D" parent="."]
+scale = Vector2( 0.2, 0.2 )
+z_index = -1
+emitting = false
+amount = 100
+lifetime = 2.0
+local_coords = false
+draw_order = 1
+process_material = SubResource( 6 )
+texture = ExtResource( 2 )

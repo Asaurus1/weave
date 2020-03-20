@@ -9,19 +9,25 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node",
+"class": "Movement",
+"language": "GDScript",
+"path": "res://TestScene/MovementClass.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
-"path": "res://o_player.gd"
+"path": "res://TestScene/o_player.gd"
 } ]
 _global_script_class_icons={
+"Movement": "",
 "Player": ""
 }
 
 [application]
 
 config/name="Weave"
-run/main_scene="res://TestScene.tscn"
+run/main_scene="res://TestScene/TestScene.tscn"
 config/icon="res://icon.png"
 
 [display]
